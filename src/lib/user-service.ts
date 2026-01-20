@@ -6,15 +6,9 @@ export interface UserProfile {
   avatar: string;
 }
 
-const defaultUser: UserProfile = {
-  name: "Valdielson",
-  email: "valdielson@example.com",
-  avatar: "https://github.com/shadcn.png",
-};
-
-export function getUserProfile(): UserProfile {
+export function getUserProfile(): UserProfile | null {
   if (typeof window === "undefined") {
-    return defaultUser;
+    return null;
   }
 
   try {
@@ -26,7 +20,7 @@ export function getUserProfile(): UserProfile {
     console.error("Erro ao recuperar perfil do usuário:", error);
   }
 
-  return defaultUser;
+  return null;
 }
 
 export function saveUserProfile(user: UserProfile): void {
